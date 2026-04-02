@@ -1,0 +1,16 @@
+{
+  "rules": {
+    "data": {
+      ".read": "true",
+      ".write": "root.child('users').child(auth.uid).child('role').val() === 'admin' || (root.child('users').child(auth.uid).child('role').val() === 'editor' && !data.child('projects').child(newData.child('activeProjectId').val()).child('isLocked').val())"
+    },
+    "users": {
+      ".read": "true",
+      ".write": "root.child('users').child(auth.uid).child('role').val() === 'admin'"
+    },
+    "logs": {
+      ".read": "root.child('users').child(auth.uid).child('role').val() === 'admin'",
+      ".write": "auth != null"
+    }
+  }
+}
