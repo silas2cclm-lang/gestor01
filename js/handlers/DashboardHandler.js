@@ -127,15 +127,24 @@ class DashboardHandler {
         projectsInProgress++;
       }
 
+      const formatDate = (dateStr) => {
+        if (!dateStr || dateStr === '-') return '-';
+        const parts = dateStr.split('-');
+        if (parts.length === 3) {
+          return `${parts[2]}/${parts[1]}/${parts[0]}`;
+        }
+        return dateStr;
+      };
+
       if (hasDelayedTasks) {
-        projectsDelayed.push({ project: p, progress: progress, dueDateString, daysDiff, hasLimitExceeded, dataLimite: p.details?.dataLimite || '-', delayedTasks: pTasks.filter(t => {
+        projectsDelayed.push({ project: p, progress: progress, dueDateString, daysDiff, hasLimitExceeded, dataLimite: formatDate(p.details?.dataLimite), delayedTasks: pTasks.filter(t => {
             if(t.status === 'Feito' || !t.dueDate) return false;
             const parts = t.dueDate.split('-');
             return new Date(parts[0], parts[1]-1, parts[2]) < today;
         }).length });
       }
 
-      projectsOverview.push({ project: p, progress: progress, totalTasks: totalPTasks, doneTasks: donePTasks, hasDelayedTasks, dueDateString, daysDiff, hasLimitExceeded, dataLimite: p.details?.dataLimite || '-' });
+      projectsOverview.push({ project: p, progress: progress, totalTasks: totalPTasks, doneTasks: donePTasks, hasDelayedTasks, dueDateString, daysDiff, hasLimitExceeded, dataLimite: formatDate(p.details?.dataLimite) });
     });
 
     const avgTaskTimeDays = countDoneTasks > 0 ? (sumTasksDuration / countDoneTasks).toFixed(1) : 0;

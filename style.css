@@ -22,7 +22,7 @@
   --urg-urgent: #f59e0b;
   --urg-critical: #ef4444;
   
-  --font-family: 'Sora', 'Segoe UI', sans-serif;
+  --font-family: 'Plus Jakarta Sans', 'Sora', 'Segoe UI', sans-serif;
   
   --gradient-silver: linear-gradient(180deg, #F8FAFB 0%, #E3E7EA 100%);
   --gradient-metal-active: linear-gradient(145deg, #EDEFF1 0%, #FFFFFF 100%);
@@ -494,6 +494,12 @@ body {
   background: rgba(0, 115, 234, 0.05);
   box-shadow: var(--shadow-glow-primary);
   transform: translateY(-1px);
+}
+
+.btn-dashboard.active {
+  background: var(--primary);
+  color: white;
+  box-shadow: var(--shadow-glow-primary);
 }
 
 .sidebar-content {

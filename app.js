@@ -1,7 +1,7 @@
 class VThinkApp {
   constructor() {
     this.state = {
-      activeProjectId: "p1",
+      activeProjectId: null,
       geralCollapsed: false,
       categories: [],
       projects: [{
@@ -72,6 +72,10 @@ class VThinkApp {
     const projectActions = document.querySelector('.project-actions');
     const btnDelete = document.getElementById('btn-delete-project');
     const mainHeader = document.getElementById('main-header');
+    const navDashBtn = document.getElementById('nav-dashboard-btn');
+    if (navDashBtn) {
+      navDashBtn.classList.toggle('active', !this.state.activeProjectId);
+    }
 
     if (!this.state.activeProjectId) {
       // Estamos no modo Dashboard
@@ -79,6 +83,7 @@ class VThinkApp {
       if (viewBoard) viewBoard.style.display = 'none';
       if (viewGantt) viewGantt.style.display = 'none';
       if (viewDashboard) viewDashboard.style.display = 'block';
+      this.dashboardHandler.renderDashboard();
     } else {
       if (mainHeader) mainHeader.style.display = 'flex';
       if (viewDashboard) viewDashboard.style.display = 'none';
